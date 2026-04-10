@@ -135,3 +135,100 @@ updates:
 • Commit: ci(deps): add dependabot config
 
 • Add automated security checks•
+• Commit: ci: add GitHub Actions CI with npm audit
+
+• Add SAST / secret scanning• How: enable GitHub Advanced Security if available; otherwise add open-source scanners (e.g., gitleaks in CI).
+• Example step:- name: Run gitleaks
+  uses: zricethezav/gitleaks-action@v2
+  with:
+    args: --path=.
+
+• Commit: ci(security): add gitleaks secret scan
+
+• Add license and security policy• Files: LICENSE (choose MIT/Apache2/GPL), .github/SECURITY.md
+• Commit: chore: add LICENSE and SECURITY.md
+
+
+
+---
+
+3. Repo hygiene, contributor experience & docs
+
+Goal: make the project easy to contribute to and legally safe.
+
+• Improve README• What to add: short project description, quick start, build/test commands, license, trademark notice, contact for legal.
+• Suggested README sections: Overview, Quick Start, Contributing, License, Trademark & Contact.
+• Commit: docs: improve README with quick start and trademark notice
+
+• Add CONTRIBUTING, CODE_OF_CONDUCT, ISSUE_TEMPLATE, PULL_REQUEST_TEMPLATE• Files: .github/CONTRIBUTING.md, .github/CODE_OF_CONDUCT.md, .github/ISSUE_TEMPLATE/bug_report.md, .github/PULL_REQUEST_TEMPLATE.md
+• Commit: docs: add contributing, code of conduct, and templates
+
+• Add CODEOWNERS• File: .github/CODEOWNERS (e.g., * @Adlinke)
+• Commit: chore: add CODEOWNERS
+
+• Add semantic-release or release process• Why: consistent changelogs and releases.
+• How: add release workflow or use semantic-release in CI.
+• Commit: ci(release): add semantic-release config
+
+
+
+---
+
+4. App / security design notes (for AdLinke Browser integration)
+
+Goal: ensure the repo supports secure onboarding and auth flows you asked about earlier.
+
+• Document authentication architecture• File: docs/auth-architecture.md — include WebAuthn/FIDO2, TOTP fallback, YubiKey guidance, device attestation, token binding.
+• Commit: docs: add auth architecture and YubiKey guidance
+
+• Add sample WebAuthn server snippet• Example (Node/Express):// pseudocode: register endpoint
+app.post('/webauthn/register', async (req, res) => {
+  const { username } = req.body;
+  const challenge = generateChallenge();
+  saveChallengeForUser(username, challenge);
+  res.json({ publicKey: { challenge, rp: { name: 'AdLinke' }, user: { id: base64url(username), name: username }, pubKeyCredParams: [{ alg: -7, type: 'public-key' }] }});
+});
+
+• Commit: feat(auth): add example WebAuthn register/login snippets
+
+• Add recovery & backup UX docs• File: docs/recovery-flow.md with the one‑page guide you approved and KYC steps.
+• Commit: docs: add recovery and backup authenticator flow
+
+
+
+---
+
+5. Trademark, legal and takedown handling
+
+Goal: reduce risk of future takedowns and make it easy to respond.
+
+• Add TRADEMARK.md and contact• Contents: owner, permitted uses, takedown contact, licensing of logos.
+• Commit: docs: add TRADEMARK.md
+
+• If repo was disabled or flagged• Action: open GitHub Support appeal with proof of ownership or permission; include trademark registration or statement of rights.
+• Add to repo: LEGAL.md with scanned registration (if you want) — but do not upload sensitive legal documents publicly; instead provide contact email and instructions.
+
+• Add a short contributor license / CLA if you accept contributions• File: CONTRIBUTOR_LICENSE.md or use CLA bot.
+• Commit: chore: add contributor license guidance
+
+
+
+---
+
+6. QA, deployment and maintenance checklist
+
+Goal: ensure changes are tested and maintained.
+
+• Pre‑merge checks• Require CI to pass, require at least one approving review, run gitleaks, npm audit, unit tests.
+
+• Release checklist• Bump version, run tests, run npm audit fix, run SAST, create release notes.
+
+• Ongoing maintenance• Weekly Dependabot PRs, monthly dependency review, quarterly security audit and pen test.
+
+• Suggested PR titles and messages• fix(security): remove leaked secret and rotate keys
+• ci: add GitHub Actions CI and gitleaks secret scanning
+• docs: add trademark notice and recovery flow
+
+
+
+---
