@@ -90,3 +90,48 @@
   </div>
 </body>
 </html>
+prepared a prioritised, actionable audit and repair plan for the GitHub repository at https://github.com/AdLinke-Media/Trademark-/tree/main. This plan covers security, repository hygiene, CI/CD, legal/trademark, documentation & UX, and deployment. For each area I list what to fix, how to fix it (concrete file edits or commands), and suggested commit/PR text so you or your devs can apply the changes quickly.
+
+---
+
+1. Immediate high‑priority fixes (do these first)
+
+Goal: remove critical risks and stop accidental leaks or takedowns.
+
+• Remove secrets and credentials• What: scan repo for API keys, private keys, passwords, tokens, .env files, or large base64 blobs.
+• How: run git grep -n "AKIA\|PRIVATE KEY\|BEGIN RSA PRIVATE KEY\|password\|secret" locally; remove any secrets and rotate them.
+• Files to add: .gitignore entries for .env, *.pem, *.key, node_modules/.
+• Suggested commit: chore(security): remove secrets from repo and add .gitignore
+
+• Enable GitHub secret scanning & revoke exposed tokens• How: enable repository secret scanning in GitHub settings and rotate any exposed credentials immediately.
+• Suggested commit/PR text: ci(security): enable secret scanning and rotate exposed credentials
+
+• Fix trademark/takedown risk• What: if GitHub flagged the repo for trademark issues, add a clear trademark notice and contact information in README and a TRADEMARK.md.
+• How (README snippet):## Trademark notice
+The name and logos used in this repository are trademarks of AdLinke Media. For trademark inquiries contact: legal@adlinke.example
+
+• Suggested commit: docs: add trademark notice and contact info
+
+• Lock down branch protection• What: enable branch protection on main (require PR reviews, status checks, no force pushes).
+• How: GitHub → Settings → Branches → Add rule for main: require PR reviews (1+), require status checks, require signed commits if possible.
+• Suggested commit: chore(repo): enable branch protection and require PR reviews
+
+
+
+---
+
+2. Security & CI improvements (developer tasks)
+
+Goal: make builds reproducible, scan dependencies, and prevent regressions.
+
+• Add Dependabot / Renovate• File: .github/dependabot.yml
+• Example:version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+• Commit: ci(deps): add dependabot config
+
+• Add automated security checks•
