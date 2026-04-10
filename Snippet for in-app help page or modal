@@ -1,0 +1,35 @@
+# html
+<section id="security-guide">
+  <h1>Welcome to AdLinke Browser Security</h1>
+  <p>Thank you for choosing <strong>AdLinke Browser</strong>. This guide explains how to enroll authenticators and recover access.</p>
+
+  <h2>Enrolling Your Device</h2>
+  <ol>
+    <li><strong>Create your account</strong>: enter email, set a strong password, verify email code.</li>
+    <li><strong>Register a primary authenticator</strong>: recommended YubiKey/FIDO2; alternative TOTP app.</li>
+    <li><strong>Enable biometrics and PIN</strong>: unlock device-bound keys stored in secure keystore.</li>
+    <li><strong>Register a backup method</strong>: spare key or second authenticator; avoid SMS-only backup.</li>
+    <li><strong>Complete attestation</strong> if prompted to confirm device integrity.</li>
+  </ol>
+
+  <h2>One-Time Passwords</h2>
+  <p><strong>TOTP</strong> is preferred. SMS/email OTPs are fallback only and expire quickly.</p>
+
+  <h2>Recovery</h2>
+  <ol>
+    <li>Use backup authenticator to sign in and re-register.</li>
+    <li>If no backup, start recovery: verified email + photo ID + live selfie or KYC checks.</li>
+    <li>After verification, temporary token issued; register new authenticators immediately.</li>
+    <li>Report suspected compromise via in-app Support; sensitive actions will be suspended.</li>
+  </ol>
+
+  <h2>Security Tips</h2>
+  <ul>
+    <li>Register a spare hardware key.</li>
+    <li>Prefer TOTP or hardware keys over SMS.</li>
+    <li>Do not share PINs or recovery codes.</li>
+    <li>Keep OS and app updated; avoid rooted/jailbroken devices.</li>
+  </ul>
+
+  <p>Need help? Go to <strong>Settings &gt; Security &gt; Recovery</strong> or contact Support.</p>
+</section>
