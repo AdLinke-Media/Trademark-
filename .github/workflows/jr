@@ -1,0 +1,7 @@
+// pseudocode: register endpoint
+app.post('/webauthn/register', async (req, res) => {
+  const { username } = req.body;
+  const challenge = generateChallenge();
+  saveChallengeForUser(username, challenge);
+  res.json({ publicKey: { challenge, rp: { name: 'AdLinke' }, user: { id: base64url(username), name: username }, pubKeyCredParams: [{ alg: -7, type: 'public-key' }] }});
+});
