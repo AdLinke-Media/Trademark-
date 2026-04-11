@@ -232,3 +232,9 @@ Goal: ensure changes are tested and maintained.
 
 
 ---
+![Build](https://img.shields.io/github/actions/workflow/status/AdLinke-Media/Trademark-/ci.yml?branch=main&label=build&logo=github&style=for-the-badge)
+![Release](https://img.shields.io/github/v/release/AdLinke-Media/Trademark-?label=release&style=for-the-badge)
+![License](https://img.shields.io/github/license/AdLinke-Media/Trademark-?style=for-the-badge)
+![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/AdLinke-Media/Trademark-?style=for-the-badge)
+![Coverage](https://img.shields.io/codecov/c/github/AdLinke-Media/Trademark-?style=for-the-badge)
+![Downloads](https://img.shields.io/github/downloads/AdLinke-Media/Trademark-/total?style=for-the-badge)
